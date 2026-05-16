@@ -22,13 +22,13 @@ class DatabaseSeeder extends Seeder
         );
 
         $criterios = [
-            ['titulo' => 'Aderência', 'pergunta' => 'Qual a aderência da solução?', 'peso_maximo' => 10],
-            ['titulo' => 'Criatividade', 'pergunta' => 'Qual a criatividade da solução?', 'peso_maximo' => 10],
-            ['titulo' => 'Inovação', 'pergunta' => 'Qual o grau de inovação?', 'peso_maximo' => 15],
-            ['titulo' => 'Atratividade', 'pergunta' => 'Qual a atratividade da solução?', 'peso_maximo' => 20],
-            ['titulo' => 'Canvas', 'pergunta' => 'Avalie o modelo de negócios (Canvas).', 'peso_maximo' => 10],
-            ['titulo' => 'Protótipo', 'pergunta' => 'Avalie a qualidade do protótipo.', 'peso_maximo' => 10],
-            ['titulo' => 'Pitch', 'pergunta' => 'Como foi a apresentação (Pitch)?', 'peso_maximo' => 25],
+            ['titulo' => 'Aderencia', 'pergunta' => 'Qual a aderencia da solucao?', 'peso_maximo' => 10],
+            ['titulo' => 'Criatividade', 'pergunta' => 'Qual a criatividade da solucao?', 'peso_maximo' => 10],
+            ['titulo' => 'Inovacao', 'pergunta' => 'Qual o grau de inovacao?', 'peso_maximo' => 15],
+            ['titulo' => 'Atratividade', 'pergunta' => 'Qual a atratividade da solucao?', 'peso_maximo' => 20],
+            ['titulo' => 'Canvas', 'pergunta' => 'Avalie o modelo de negocios (Canvas).', 'peso_maximo' => 10],
+            ['titulo' => 'Prototipo', 'pergunta' => 'Avalie a qualidade do prototipo.', 'peso_maximo' => 10],
+            ['titulo' => 'Pitch', 'pergunta' => 'Como foi a apresentacao (Pitch)?', 'peso_maximo' => 25],
         ];
 
         $ids = [];
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         }
 
         $votacao = Votacao::updateOrCreate(
-            ['nome' => 'Primeira Votação'],
+            ['nome' => 'Primeira Votacao'],
             ['esta_ativa' => true]
         );
         $votacao->criterios()->sync($ids);
