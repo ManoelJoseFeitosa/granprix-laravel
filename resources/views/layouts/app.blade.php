@@ -341,8 +341,7 @@
                 padding: 0.3rem 0;
             }
             .admin-btn {
-                padding: 0.4rem 0.8rem !important;
-                font-size: 0.85rem;
+                display: none !important;
             }
         }
     </style>
