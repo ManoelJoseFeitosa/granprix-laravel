@@ -83,9 +83,30 @@
 
 <div class="home-hero">
     @if($homeImage)
+        @php
+            $imagePath = is_object($homeImage) ? $homeImage->valor : $homeImage;
+            
+            // Tratamento: Se o Filament salvou como JSON array, extraímos apenas a imagem
+            if (is_string($imagePath) && str_starts_with($imagePath, '[')) {
+                $decoded = json_decode($imagePath, true);
+                if (is_array($decoded) && count($decoded) > 0) {
+                    $imagePath = $decoded[0];
+                }
+            }
+            
+            // Usamos a fachada Storage nativa do Laravel para montar a URL correta
+            $imageUrl = Storage::disk('public')->url($imagePath);
+        @endphp
+        
         <div class="home-image-container">
-            {{-- Correção: Força o HTTPS via secure_asset e garante a extração do valor correto da imagem --}}
-            <img src="{{ secure_asset('storage/' . (is_object($homeImage) ? $homeImage->valor : $homeImage)) }}" alt="Granprix Banner" class="home-image">
+            <img src="{{ $imageUrl }}" alt="Granprix Banner" class="home-image">
+        </div>
+        
+        {{-- DEBUG: Este bloco vai imprimir os dados na tela para visualizarmos --}}
+        <div style="color: #999; font-size: 14px; margin-top: 20px; padding: 15px; border: 1px dashed #555; border-radius: 8px; text-align: left; max-width: 800px; width: 100%;">
+            <strong>Debug Técnico (Removeremos depois de validar):</strong><br><br>
+            <strong>Caminho Extraído do Banco:</strong> {{ $imagePath }} <br>
+            <strong>URL Final Gerada:</strong> {{ $imageUrl }}
         </div>
     @else
         <div class="placeholder-image">
