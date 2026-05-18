@@ -70,6 +70,16 @@
         color: var(--text-muted);
         font-weight: 400;
     }
+
+    @media (max-width: 768px) {
+        .criteria-grid {
+            grid-template-columns: 1fr;
+        }
+        .submit-area .btn {
+            width: 100%;
+            max-width: 100% !important;
+        }
+    }
 </style>
 
 <div class="form-wrapper">

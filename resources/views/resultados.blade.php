@@ -84,7 +84,50 @@
     }
 
     @media (max-width: 768px) {
-        .podium { display: none; }
+        .podium {
+            gap: 10px;
+            margin-bottom: 3rem;
+            height: 200px;
+        }
+        .podium-item {
+            width: 30%;
+            min-width: 85px;
+        }
+        .podium-team {
+            font-size: 0.75rem;
+            margin-top: 35px;
+            word-wrap: break-word;
+            padding: 0 5px;
+            text-align: center;
+        }
+        .podium-score {
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+        .podium-item.first { height: 170px; }
+        .podium-item.second { height: 130px; }
+        .podium-item.third { height: 100px; }
+        .podium-rank {
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            top: -20px;
+        }
+        table {
+            font-size: 0.9rem;
+        }
+        th, td {
+            padding: 0.75rem 0.5rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .podium-team {
+            font-size: 0.7rem;
+        }
+        .podium-score {
+            font-size: 0.9rem;
+        }
     }
 </style>
 

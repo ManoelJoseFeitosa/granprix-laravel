@@ -66,6 +66,30 @@
         gap: 1rem;
         justify-content: center;
     }
+
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        .hero-subtitle {
+            font-size: 1.1rem;
+            padding: 0 1rem;
+        }
+        .cta-buttons {
+            flex-direction: column;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .cta-buttons .btn {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .home-image-container {
+            margin-bottom: 2rem;
+            border-radius: 12px;
+        }
+    }
 </style>
 
 <div class="home-hero">

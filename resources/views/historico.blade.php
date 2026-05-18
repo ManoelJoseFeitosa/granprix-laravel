@@ -88,6 +88,22 @@
         .history-layout {
             grid-template-columns: 1fr;
         }
+        .vote-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .vote-header > div:last-child {
+            text-align: left;
+        }
+        .vote-scores {
+            justify-content: space-between;
+        }
+        .score-item {
+            flex: 1 1 45%;
+            text-align: center;
+            box-sizing: border-box;
+        }
     }
 </style>
 

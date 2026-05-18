@@ -316,8 +316,33 @@
                 flex-direction: column;
                 gap: 1rem;
             }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
             .glass-card {
                 padding: 1.5rem;
+            }
+            main {
+                padding: 1.5rem 1rem;
+            }
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-links {
+                gap: 0.5rem;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+                padding: 0.3rem 0;
+            }
+            .admin-btn {
+                padding: 0.4rem 0.8rem !important;
+                font-size: 0.85rem;
             }
         }
     </style>
