@@ -10,8 +10,10 @@ Route::get('/resultados', [PageController::class, 'resultados'])->name('resultad
 Route::get('/historico', [PageController::class, 'historico'])->name('historico');
 Route::get('/historico/{id}', [PageController::class, 'resultadoEspecifico'])->name('resultado_especifico');
 
-// Rota customizada para entrega de arquivos do Storage (Solução para o bloqueio da Hostinger)
-Route::get('/storage/{path}', function ($path) {
+// Rota customizada para burlar o bloqueio de diretórios nativos do LiteSpeed na Hostinger
+Route::get('/file-media/{path}', function ($path) {
+    // Limpa possíveis barras duplicadas na string
+    $path = ltrim($path, '/');
     $fullPath = storage_path('app/public/' . $path);
 
     if (!file_exists($fullPath)) {

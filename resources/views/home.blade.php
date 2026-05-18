@@ -86,7 +86,7 @@
         @php
             $imagePath = is_object($homeImage) ? $homeImage->valor : $homeImage;
             
-            // Tratamento: Se o Filament salvou como JSON array, extraímos apenas a imagem
+            // Tratamento caso o Filament salve a string como um JSON Array
             if (is_string($imagePath) && str_starts_with($imagePath, '[')) {
                 $decoded = json_decode($imagePath, true);
                 if (is_array($decoded) && count($decoded) > 0) {
@@ -96,8 +96,8 @@
         @endphp
         
         <div class="home-image-container">
-            {{-- A imagem agora é chamada através do asset() padrão, que será interceptado pela nossa nova rota no web.php --}}
-            <img src="{{ asset('storage/' . $imagePath) }}" alt="Granprix Banner" class="home-image">
+            {{-- Alterado: Forçando a chamada para a nossa rota camuflada via URL relativa --}}
+            <img src="{{ url('/file-media/' . ltrim($imagePath, '/')) }}" alt="Granprix Banner" class="home-image">
         </div>
     @else
         <div class="placeholder-image">
