@@ -66,44 +66,13 @@
         gap: 1rem;
         justify-content: center;
     }
-
-    .placeholder-image {
-        width: 100%;
-        height: 400px;
-        background: rgba(255, 255, 255, 0.05);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--text-muted);
-        font-size: 1.2rem;
-        border: 2px dashed rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-    }
 </style>
 
 <div class="home-hero">
-    @if($homeImage)
-        @php
-            $imagePath = is_object($homeImage) ? $homeImage->valor : $homeImage;
-            
-            // Tratamento caso o Filament salve a string como um JSON Array
-            if (is_string($imagePath) && str_starts_with($imagePath, '[')) {
-                $decoded = json_decode($imagePath, true);
-                if (is_array($decoded) && count($decoded) > 0) {
-                    $imagePath = $decoded[0];
-                }
-            }
-        @endphp
-        
-        <div class="home-image-container">
-            {{-- Alterado: Forçando a chamada para a nossa rota camuflada via URL relativa --}}
-            <img src="{{ url('/file-media/' . ltrim($imagePath, '/')) }}" alt="Granprix Banner" class="home-image">
-        </div>
-    @else
-        <div class="placeholder-image">
-            <p>Imagem da Home não configurada.<br><span style="font-size:0.9rem">Configure no painel de administração.</span></p>
-        </div>
-    @endif
+    <div class="home-image-container">
+        {{-- Chamada direta e estática para a imagem na pasta public/images --}}
+        <img src="{{ asset('images/logo_granprix.png') }}" alt="Granprix Banner" class="home-image">
+    </div>
 
     <h1 class="hero-title">Granprix Senai</h1>
     <p class="hero-subtitle">Sistema oficial de avaliação e votação para os projetos das escuderias do desafio Granprix.</p>
