@@ -93,20 +93,11 @@
                     $imagePath = $decoded[0];
                 }
             }
-            
-            // Usamos a fachada Storage nativa do Laravel para montar a URL correta
-            $imageUrl = Storage::disk('public')->url($imagePath);
         @endphp
         
         <div class="home-image-container">
-            <img src="{{ $imageUrl }}" alt="Granprix Banner" class="home-image">
-        </div>
-        
-        {{-- DEBUG: Este bloco vai imprimir os dados na tela para visualizarmos --}}
-        <div style="color: #999; font-size: 14px; margin-top: 20px; padding: 15px; border: 1px dashed #555; border-radius: 8px; text-align: left; max-width: 800px; width: 100%;">
-            <strong>Debug Técnico (Removeremos depois de validar):</strong><br><br>
-            <strong>Caminho Extraído do Banco:</strong> {{ $imagePath }} <br>
-            <strong>URL Final Gerada:</strong> {{ $imageUrl }}
+            {{-- A imagem agora é chamada através do asset() padrão, que será interceptado pela nossa nova rota no web.php --}}
+            <img src="{{ asset('storage/' . $imagePath) }}" alt="Granprix Banner" class="home-image">
         </div>
     @else
         <div class="placeholder-image">
