@@ -84,7 +84,8 @@
 <div class="home-hero">
     @if($homeImage)
         <div class="home-image-container">
-            <img src="{{ asset('storage/' . $homeImage) }}" alt="Granprix Banner" class="home-image">
+            {{-- Correção: Força o HTTPS via secure_asset e garante a extração do valor correto da imagem --}}
+            <img src="{{ secure_asset('storage/' . (is_object($homeImage) ? $homeImage->valor : $homeImage)) }}" alt="Granprix Banner" class="home-image">
         </div>
     @else
         <div class="placeholder-image">
