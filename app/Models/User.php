@@ -52,7 +52,7 @@ class User extends Authenticatable implements FilamentUser
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        // Libera o acesso exclusivamente para o email cadastrado no Seeder
-        return $this->email === 'admin@admin.com';
+        // Alterado: Libera o acesso para todos os usuários válidos cadastrados no sistema
+        return true; 
     }
 }
