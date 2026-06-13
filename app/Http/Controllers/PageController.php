@@ -35,7 +35,8 @@ class PageController extends Controller
     {
         $votacao_ativa = Votacao::where('esta_ativa', true)->first();
         if (!$votacao_ativa) {
-            return redirect()->back()->with('error', 'Nenhuma vota��o ativa.');
+            // Correção pontual: Ajustado o erro de caracteres na string (UTF-8)
+            return redirect()->back()->with('error', 'Nenhuma votação ativa.');
         }
 
         $request->validate([
