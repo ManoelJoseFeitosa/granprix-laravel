@@ -98,7 +98,7 @@
         <img src="{{ asset('images/logo_granprix.jpg') }}" alt="Granprix Banner" class="home-image">
     </div>
 
-    <h1 class="hero-title">Grand Prix Senai</h1>
+    <h1 class="hero-title">Grand Prix SENAI</h1>
     <p class="hero-subtitle">Sistema oficial de avaliação e votação para os projetos das escuderias do desafio Granprix.</p>
     
     <div class="cta-buttons">

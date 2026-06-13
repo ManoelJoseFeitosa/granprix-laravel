@@ -351,7 +351,7 @@
         <div class="nav-content">
             <a href="{{ route('home') }}" class="logo">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent);"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                Gran<span>prix</span>
+                Grand<span>Prix</span>
             </a>
             <div class="nav-links">
                 <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
