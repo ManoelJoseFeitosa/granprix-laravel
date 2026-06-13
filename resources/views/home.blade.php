@@ -95,7 +95,7 @@
 <div class="home-hero">
     <div class="home-image-container">
         {{-- Chamada direta e estática para a imagem na pasta public/images --}}
-        <img src="{{ asset('images/logo_granprix.png') }}" alt="Granprix Banner" class="home-image">
+        <img src="{{ asset('images/logo_granprix.jpg') }}" alt="Granprix Banner" class="home-image">
     </div>
 
     <h1 class="hero-title">Granprix Senai</h1>
