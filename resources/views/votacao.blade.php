@@ -93,8 +93,13 @@
                 @csrf
 
                 <div class="form-group">
-                    <label for="jurado">Seu Nome (Avaliador)</label>
-                    <input type="text" id="jurado" name="jurado" required placeholder="Digite seu nome completo">
+                    <label for="nome">Nome (Avaliador)</label>
+                    <input type="text" id="nome" name="nome" value="{{ old('nome') }}" required placeholder="Digite seu nome">
+                </div>
+
+                <div class="form-group">
+                    <label for="sobrenome">Sobrenome (Avaliador)</label>
+                    <input type="text" id="sobrenome" name="sobrenome" value="{{ old('sobrenome') }}" required placeholder="Digite seu sobrenome">
                 </div>
 
                 <div class="form-group">
@@ -102,7 +107,7 @@
                     <select id="escuderia" name="escuderia" required>
                         <option value="">Selecione uma Escuderia...</option>
                         @foreach($escuderias as $escuderia)
-                            <option value="{{ $escuderia->id }}">{{ $escuderia->nome }}</option>
+                            <option value="{{ $escuderia->id }}" {{ (string) old('escuderia') === (string) $escuderia->id ? 'selected' : '' }}>{{ $escuderia->nome }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -114,12 +119,13 @@
                                 <div class="criterion-title">{{ $criterio->titulo }}</div>
                                 <div class="criterion-question">{{ $criterio->pergunta }}</div>
                                 
-                                <input type="number" 
-                                       class="criterion-input" 
-                                       id="nota-{{ $criterio->id }}" 
-                                       name="nota-{{ $criterio->id }}" 
-                                       min="0" 
-                                       max="{{ $criterio->peso_maximo }}" 
+                                <input type="number"
+                                       class="criterion-input"
+                                       id="nota-{{ $criterio->id }}"
+                                       name="nota-{{ $criterio->id }}"
+                                       value="{{ old('nota-' . $criterio->id) }}"
+                                       min="0"
+                                       max="{{ $criterio->peso_maximo }}"
                                        required
                                        placeholder="0">
                                 <span class="score-hint">Nota de 0 a {{ $criterio->peso_maximo }}</span>

@@ -103,7 +103,9 @@
     
     <div class="cta-buttons">
         <a href="{{ route('votacao') }}" class="btn">Votar Agora</a>
-        <a href="{{ route('resultados') }}" class="btn btn-outline">Ver Resultados</a>
+        @auth
+            <a href="{{ route('resultados') }}" class="btn btn-outline">Ver Resultados</a>
+        @endauth
     </div>
 </div>
 @endsection

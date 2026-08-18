@@ -40,17 +40,53 @@ class PageController extends Controller
         }
 
         $request->validate([
-            'jurado' => 'required|string',
+            'nome' => 'required|string|max:255',
+            'sobrenome' => 'required|string|max:255',
             'escuderia' => 'required|exists:escuderias,id',
+        ], [
+            'nome.required' => 'Informe o seu nome.',
+            'sobrenome.required' => 'Informe o seu sobrenome.',
+            'escuderia.required' => 'Selecione uma escuderia.',
+            'escuderia.exists' => 'A escuderia selecionada é inválida.',
         ]);
+
+        // Monta o nome completo do jurado (Nome + Sobrenome) normalizando espaços.
+        $jurado = preg_replace('/\s+/', ' ', trim($request->nome . ' ' . $request->sobrenome));
+
+        // Validação das notas no servidor: obrigatórias e dentro do intervalo 0..peso_maximo.
+        $criterios = $votacao_ativa->criterios;
+        $regras_notas = [];
+        $mensagens_notas = [];
+        foreach ($criterios as $criterio) {
+            $campo = 'nota-' . $criterio->id;
+            $peso = (int) $criterio->peso_maximo;
+            $regras_notas[$campo] = ['required', 'integer', 'min:0', 'max:' . $peso];
+            $mensagens_notas[$campo . '.required'] = "A nota do critério \"{$criterio->titulo}\" é obrigatória.";
+            $mensagens_notas[$campo . '.integer'] = "A nota do critério \"{$criterio->titulo}\" deve ser um número inteiro.";
+            $mensagens_notas[$campo . '.min'] = "A nota do critério \"{$criterio->titulo}\" não pode ser menor que 0.";
+            $mensagens_notas[$campo . '.max'] = "A nota do critério \"{$criterio->titulo}\" não pode ser maior que {$peso}.";
+        }
+        $request->validate($regras_notas, $mensagens_notas);
+
+        // Trava de voto duplicado: o mesmo jurado não pode votar duas vezes
+        // na mesma escuderia dentro da mesma votação.
+        $ja_votou = Voto::where('votacao_id', $votacao_ativa->id)
+            ->where('escuderia_id', $request->escuderia)
+            ->whereRaw('LOWER(TRIM(jurado)) = ?', [mb_strtolower($jurado)])
+            ->exists();
+
+        if ($ja_votou) {
+            return redirect()->route('votacao')
+                ->withInput()
+                ->with('error', "O jurado \"{$jurado}\" já registrou um voto para esta escuderia nesta votação. Cada jurado pode votar apenas uma vez por escuderia.");
+        }
 
         $voto = Voto::create([
             'votacao_id' => $votacao_ativa->id,
-            'jurado' => $request->jurado,
+            'jurado' => $jurado,
             'escuderia_id' => $request->escuderia,
         ]);
 
-        $criterios = $votacao_ativa->criterios;
         foreach ($criterios as $criterio) {
             $valor_nota = $request->input('nota-' . $criterio->id);
             if ($valor_nota !== null) {

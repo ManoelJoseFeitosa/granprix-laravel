@@ -356,8 +356,10 @@
             <div class="nav-links">
                 <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
                 <a href="{{ route('votacao') }}" class="{{ request()->routeIs('votacao') ? 'active' : '' }}">Votação</a>
-                <a href="{{ route('resultados') }}" class="{{ request()->routeIs('resultados') ? 'active' : '' }}">Resultados</a>
-                <a href="{{ route('historico') }}" class="{{ request()->routeIs('historico*') ? 'active' : '' }}">Histórico</a>
+                @auth
+                    <a href="{{ route('resultados') }}" class="{{ request()->routeIs('resultados') ? 'active' : '' }}">Resultados</a>
+                    <a href="{{ route('historico') }}" class="{{ request()->routeIs('historico*') ? 'active' : '' }}">Histórico</a>
+                @endauth
                 <a href="/admin" class="admin-btn" target="_blank">Admin</a>
             </div>
         </div>
@@ -372,6 +374,15 @@
         @if(session('error'))
             <div class="alert alert-error">
                 {{ session('error') }}
+            </div>
+        @endif
+        @if($errors->any())
+            <div class="alert alert-error">
+                <ul style="margin: 0; padding-left: 1.25rem;">
+                    @foreach($errors->all() as $erro)
+                        <li>{{ $erro }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
 
